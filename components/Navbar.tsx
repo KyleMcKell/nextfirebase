@@ -5,20 +5,21 @@ import Image from 'next/image';
 interface Props {}
 
 const Navbar = (props: Props) => {
-	const { user, username }: any = {};
+	const user = null;
+	const username = null;
 
 	return (
 		<nav className="navbar">
 			<ul>
 				<li>
 					<Link href="/" passHref>
-						<button>FEED</button>
+						<button className="btn-logo">FEED</button>
 					</Link>
 				</li>
 				{/* user is signed in and has username */}
 				{username && (
 					<>
-						<li>
+						<li className="push-left">
 							<Link href="/admin" passHref>
 								<button className="btn-blue">Write Posts</button>
 							</Link>
