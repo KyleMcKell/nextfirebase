@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Loader = ({ show }: Props) => {
-	return show ? <div className="loader"></div> : null;
+	return show ? <div className="loader" /> : null;
 };
 
 export default Loader;
