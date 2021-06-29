@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useContext } from 'react';
+import { UserContext } from '../lib/context';
 
 interface Props {}
 
-const Navbar = (props: Props) => {
-	const user = null;
-	const username = null;
+function Navbar(props: Props) {
+	const { user, username } = useContext(UserContext);
 
 	return (
 		<nav className="navbar">
@@ -25,8 +26,9 @@ const Navbar = (props: Props) => {
 							</Link>
 						</li>
 						<li>
-							<Link href={`/${username}`} passHref>
-								<Image src={user?.photoURL} alt={username} />
+							<Link href={`/${username}`}>
+								{/* <Image src={user?.photoURL} alt={username} / */}
+								Hello
 							</Link>
 						</li>
 					</>
@@ -42,6 +44,6 @@ const Navbar = (props: Props) => {
 			</ul>
 		</nav>
 	);
-};
+}
 
 export default Navbar;

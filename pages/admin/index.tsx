@@ -1,4 +1,4 @@
-export default function AdminPostsPage({}) {
+export default function AdminPosts({}) {
 	return (
 		<main>
 			<h1>Admin Posts</h1>

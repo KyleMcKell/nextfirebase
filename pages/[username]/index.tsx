@@ -1,4 +1,4 @@
-export default function UserProfilePage({}) {
+export default function UserProfile({}) {
 	return (
 		<main>
 			<h1>User Profile</h1>

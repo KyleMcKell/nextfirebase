@@ -4,8 +4,8 @@ interface Props {
 	show: boolean;
 }
 
-const Loader = ({ show }: Props) => {
+function Loader({ show }: Props) {
 	return show ? <div className="loader" /> : null;
-};
+}
 
 export default Loader;
