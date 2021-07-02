@@ -26,9 +26,13 @@ function Navbar(props: Props) {
 							</Link>
 						</li>
 						<li>
-							<Link href={`/${username}`}>
-								{/* <Image src={user?.photoURL} alt={username} / */}
-								Hello
+							<Link href={`/${username}`} passHref>
+								<Image
+									src={user?.photoURL}
+									alt={username}
+									height="50"
+									width="50"
+								/>
 							</Link>
 						</li>
 					</>
