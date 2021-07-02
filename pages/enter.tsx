@@ -30,7 +30,11 @@ export default function Enter({}) {
 // Sign in with Google button
 function SignInButton() {
 	const signInWithGoogle = async () => {
-		await auth.signInWithPopup(googleAuthProvider);
+		try {
+			await auth.signInWithPopup(googleAuthProvider);
+		} catch (error) {
+			console.log(error.message);
+		}
 	};
 
 	return (
@@ -53,8 +57,9 @@ function UsernameForm() {
 
 	const { user, username } = useContext(UserContext);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const checkUsername = useCallback(
-		debounce(async (username) => {
+		debounce(async (username: string) => {
 			if (username.length >= 3) {
 				const ref = firestore.doc(`usernames/${username}`);
 				const { exists } = await ref.get();

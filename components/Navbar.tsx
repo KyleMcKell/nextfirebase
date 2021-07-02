@@ -1,13 +1,19 @@
-import React from 'react';
+import { forwardRef, useContext } from 'react';
+import { UserContext } from '../lib/context';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useContext } from 'react';
-import { UserContext } from '../lib/context';
+import defaultPfp from '../public/default-avatar.png';
 
 interface Props {}
 
 function Navbar(props: Props) {
 	const { user, username } = useContext(UserContext);
+	const imageSrc = user ? user?.photoURL : defaultPfp;
+
+	// eslint-disable-next-line react/display-name
+	const UserImage = forwardRef(() => (
+		<Image src={imageSrc} alt={username} height="50" width="50" />
+	));
 
 	return (
 		<nav className="navbar">
@@ -27,12 +33,7 @@ function Navbar(props: Props) {
 						</li>
 						<li>
 							<Link href={`/${username}`} passHref>
-								<Image
-									src={user?.photoURL}
-									alt={username}
-									height="50"
-									width="50"
-								/>
+								<UserImage />
 							</Link>
 						</li>
 					</>
