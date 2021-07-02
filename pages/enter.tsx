@@ -8,29 +8,29 @@ import debounce from 'lodash.debounce';
 
 export default function Enter({}) {
 	const { user, username } = useContext(UserContext);
+	const [error, setError] = useState('');
 
 	// 1. user signed out <SignInButton />
 	// 2. user signed in, but missing username <UsernameForm />
 	// 3. user signed in, has username <SignOutButton />
 	return (
 		<main>
+			{error && <p className="text-danger">{error}</p>}
 			{user ? (
 				!username ? (
 					<UsernameForm />
 				) : (
-					<SignOutButton />
+					<SignOutButton setError={setError} />
 				)
 			) : (
-				<SignInButton />
+				<SignInButton setError={setError} />
 			)}
 		</main>
 	);
 }
 
 // Sign in with Google button
-function SignInButton() {
-	const [error, setError] = useState('');
-
+function SignInButton({ setError }) {
 	const signInWithGoogle = async () => {
 		try {
 			await auth.signInWithPopup(googleAuthProvider);
@@ -41,7 +41,6 @@ function SignInButton() {
 
 	return (
 		<>
-			{error && <p className="text-danger">Please complete sign in</p>}
 			<button className="btn-google" onClick={signInWithGoogle}>
 				<Image src={googleLogo} alt="Google Logo" objectFit="fill" />
 				<p>Sign in with Google</p>
@@ -51,8 +50,16 @@ function SignInButton() {
 }
 
 // Sign out button
-function SignOutButton() {
-	return <button onClick={() => auth.signOut()}>Sign Out</button>;
+function SignOutButton({ setError }) {
+	const clickHandler = () => {
+		try {
+			auth.signOut();
+		} catch (error) {
+			setError(error.message);
+		}
+	};
+
+	return <button onClick={clickHandler}>Sign Out</button>;
 }
 
 function UsernameForm() {
