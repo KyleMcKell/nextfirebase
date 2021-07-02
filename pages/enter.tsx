@@ -29,19 +29,24 @@ export default function Enter({}) {
 
 // Sign in with Google button
 function SignInButton() {
+	const [error, setError] = useState('');
+
 	const signInWithGoogle = async () => {
 		try {
 			await auth.signInWithPopup(googleAuthProvider);
 		} catch (error) {
-			console.log(error.message);
+			setError(error.message);
 		}
 	};
 
 	return (
-		<button className="btn-google" onClick={signInWithGoogle}>
-			<Image src={googleLogo} alt="Google Logo" objectFit="fill" />
-			<p>Sign in with Google</p>
-		</button>
+		<>
+			{error && <p className="text-danger">Please complete sign in</p>}
+			<button className="btn-google" onClick={signInWithGoogle}>
+				<Image src={googleLogo} alt="Google Logo" objectFit="fill" />
+				<p>Sign in with Google</p>
+			</button>
+		</>
 	);
 }
 
